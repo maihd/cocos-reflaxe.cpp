@@ -1,0 +1,7 @@
+AppDelegate
+HelloWorldScene
+
+-cp src
+-lib reflaxe.cpp
+-D cpp-output=output
+-D cxx-no-null-warnings
