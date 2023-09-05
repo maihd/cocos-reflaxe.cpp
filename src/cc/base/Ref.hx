@@ -3,7 +3,7 @@ package cc.base;
 import cxx.Ptr;
 import cxx.num.UInt32;
 
-@:native("::cocos2d::Ref*")
+@:native("::cocos2d::Ref")
 extern class Ref
 {
 	@:nativeFunctionCode("({this} == nullptr)")

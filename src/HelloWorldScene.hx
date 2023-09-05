@@ -1,5 +1,8 @@
 package;
 
+import cxx.num.Float32;
+import cc.base.Ref;
+import cc.ccui.Button;
 import cc.cc2d.LabelTTF;
 import cc.base.Director;
 import cc.cc2d.Sprite;
@@ -53,6 +56,27 @@ class HelloWorldScene extends Node
         final origin = Director.getInstance().getVisibleOrigin();
         final visibleSize = Director.getInstance().getVisibleSize();
 
+        // add a "close" icon to exit the progress. it's an autorelease object
+        final closeItem = Button.create(
+            "CloseNormal.png",
+            "CloseSelected.png");
+
+        if (closeItem.isNull() ||
+            closeItem.getContentSize().width <= 0 ||
+            closeItem.getContentSize().height <= 0)
+        {
+            problemLoading("'CloseNormal.png' and 'CloseSelected.png'");
+        }
+        else
+        {
+            final x: Float32 = origin.x + visibleSize.width - closeItem.getContentSize().width/2 - 10;
+            final y: Float32 = origin.y + closeItem.getContentSize().height/2 + 10;
+            closeItem.setPosition(new Vec2(x, y));
+            closeItem.addClickEventListener(ref -> onClickCallback(ref));
+            closeItem.setTouchEnabled(true);
+            this.addChild(closeItem);
+        }
+
         final label = LabelTTF.create("Hello World", "fonts/Marker Felt.ttf", 24);
         if (label.isNull())
         {
@@ -76,7 +100,14 @@ class HelloWorldScene extends Node
         return true;
     }
 
-	function problemLoading(arg0: String) : Void {
+	function problemLoading(arg0: String) : Void
+    {
 		trace("Error while loading: " + arg0);
 	}
+
+    function onClickCallback(ref: Ptr<Ref>) : Void
+    {
+        //Close the cocos2d-x game scene and quit the application
+        Director.getInstance().end();
+    }
 }

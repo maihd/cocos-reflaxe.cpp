@@ -56,6 +56,8 @@ extern class Director extends Ref
 
     function init() : Bool;
 
+    function end() : Void;
+
     function getOpenGLView() : Ptr<GLView>;
     function setOpenGLView(openGLView: Ptr<GLView>) : Void;
 
