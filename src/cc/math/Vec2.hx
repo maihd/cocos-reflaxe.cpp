@@ -13,7 +13,10 @@ extern class Vec2Data
 }
 
 @:forward
+@:native("::cocos2d::Vec2")
 extern abstract Vec2(Vec2Data)
 {
-    
+    @:native("::cocos2d::Vec2")
+    @:overload(function() : Void {})
+    function new(x: Float32, y: Float32);
 }

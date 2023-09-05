@@ -8,6 +8,7 @@ import cxx.num.Float32;
 @:native("::cocos2d::Rect")
 extern class Rect
 {
+    @:native("::cocos2d::Rect")
     @:overload(function() : Rect {})
     function new(x: Float32, y: Float32, width: Float32, height: Float32);
 }

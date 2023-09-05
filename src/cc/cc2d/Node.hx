@@ -1,9 +1,12 @@
 package cc.cc2d;
 
-import cc.math.Vec2;
-import cc.base.Ptr;
-import cxx.num.Float32;
+import cc.math.Size;
 import cc.base.Ref;
+import cc.math.Vec2;
+
+import cxx.Ptr;
+import cxx.num.Int32;
+import cxx.num.Float32;
 
 enum NodeEvents
 {
@@ -23,55 +26,6 @@ enum NodeEvents
     OnCleanup;
 }
 
-// @:arrowAccess
-// @:overrideMemoryManagement
-// @:unsafePtrType
-// @:forward
-// extern abstract NodePtr<T: Node>(T) 
-// 	from T to T
-//     from Ptr<T> to Ptr<T>
-// {
-// 	@:nativeFunctionCode("{arg0}")
-// 	public function new<U>(v: U);
-
-// 	public static var Null(get, never): Ptr<Dynamic>;
-
-// 	@:nativeFunctionCode("nullptr")
-// 	public static function get_Null(): Ptr<Dynamic>;
-
-// 	@:nativeFunctionCode("std::string({this})")
-// 	@:include("string", true)
-// 	public function toString(): String;
-
-// 	@:nativeFunctionCode("({this} == nullptr)")
-// 	public function isNull(): Bool;
-
-// 	@:nativeFunctionCode("({this} == {arg1})")
-// 	public function addrEquals<U>(other: cxx.Ptr<U>): Bool;
-
-// 	@:nativeFunctionCode("({this} != {arg1})")
-// 	public function addrNotEquals<U>(other: cxx.Ptr<U>): Bool;
-
-// 	@:nativeFunctionCode("({this}++)")
-// 	public function increment(): Void;
-
-// 	@:nativeFunctionCode("({this}--)")
-// 	public function decrement(): Void;
-
-// 	@:nativeFunctionCode("(*{this})")
-// 	public function toValue(): cxx.Value<T>;
-
-// 	// @:from
-// 	// static public function fromSubType<U>(other: cxx.Ptr<U>) {
-// 	// 	return new Ptr<T>(other.this);
-// 	// }
-
-// 	@:to
-// 	public inline function toRootType<U: Node>() : NodePtr<U> {
-// 		return new NodePtr<U>(this);
-// 	}
-// }
-
 
 @:include("cocos2d.h")
 @:native("::cocos2d::Node")
@@ -79,7 +33,9 @@ extern class Node extends Ref
 {
     function new();
     function init() : Bool;
-    function addChild(node: Ptr<Node>) : Void;
+    
+    @:overload(function(node: Ptr<Node>) : Void {})
+    function addChild(node: Ptr<Node>, zOrder: Int32) : Void;
 
     // Properties
 
@@ -140,4 +96,7 @@ extern class Node extends Ref
 
     @:virtual
     function setPosition(v: Vec2) : Void;
+
+    @:virtual
+    function getContentSize() : Size;
 }

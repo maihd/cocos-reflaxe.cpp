@@ -1,7 +1,7 @@
 package cc.platform;
 
 import cc.math.Rect;
-import cc.base.Ptr;
+import cxx.Ptr;
 
 @:include("cocos2d.h")
 @:native("::cocos2d::GLViewImpl")

@@ -1,9 +1,11 @@
 package cc.base;
 
+import cc.math.Vec2;
 import cc.math.Size;
 import cc.platform.GLView;
 import cc.cc2d.Scene;
-import cc.base.Ptr;
+
+import cxx.Ptr;
 import cxx.ConstCharPtr;
 
 @:native("::cocos2d::Director::Projection")
@@ -62,6 +64,7 @@ extern class Director extends Ref
     function replaceScene(scene: Ptr<Scene>) : Void;
 
     function getVisibleSize() : Size;
+    function getVisibleOrigin() : Vec2;
 
     function isDisplayStats() : Bool;
     function setDisplayStats(show: Bool) : Void;

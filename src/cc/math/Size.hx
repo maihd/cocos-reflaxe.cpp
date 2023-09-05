@@ -13,6 +13,7 @@ extern class Size
     var width: Float32;
     var height: Float32;
 
+    @:native("::cocos2d::Size")
     @:overload(function() : Size {})
     function new(width: Float32, height: Float32);
 

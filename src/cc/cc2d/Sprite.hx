@@ -1,6 +1,6 @@
 package cc.cc2d;
 
-import cc.base.Ptr;
+import cxx.Ptr;
 
 @:native("::cocos2d::Sprite")
 extern class Sprite extends Node

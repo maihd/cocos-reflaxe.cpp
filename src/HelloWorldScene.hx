@@ -1,18 +1,13 @@
 package;
 
-import haxe.display.JsonModuleTypes.JsonEnumFields;
+import cc.cc2d.LabelTTF;
 import cc.base.Director;
 import cc.cc2d.Sprite;
 import cc.cc2d.Scene;
-import cc.base.Ptr;
 import cc.cc2d.Node;
+import cc.math.Vec2;
 
-class Empty
-{
-    public function new() {
-
-    }
-}
+import cxx.Ptr;
 
 class HelloWorldScene extends Node
 {
@@ -55,17 +50,33 @@ class HelloWorldScene extends Node
             return false;
         }
 
-        final winSize = Director.getInstance().getVisibleSize();
+        final origin = Director.getInstance().getVisibleOrigin();
+        final visibleSize = Director.getInstance().getVisibleSize();
 
-        var sprite = Sprite.create("HelloWorld.png");
-        sprite.x = winSize.width * 0.5;
-        sprite.y = winSize.height * 0.5;
-        addChild(sprite);
+        final label = LabelTTF.create("Hello World", "fonts/Marker Felt.ttf", 24);
+        if (label.isNull())
+        {
+            problemLoading("'fonts/Marker Felt.ttf'");
+        }
+        else
+        {
+            // position the label on the center of the screen
+            label.setPosition(new Vec2(origin.x + visibleSize.width/2,
+                                    origin.y + visibleSize.height - label.getContentSize().height));
+    
+            // add the label as a child to this layer
+            this.addChild(label, 1);
+        }
 
-        // This code should not be compiled
-        // var empty: Ptr<Empty> = new Empty();
-        // addChild(empty);
+        final sprite = Sprite.create("HelloWorld.png");
+        sprite.x = visibleSize.width * 0.5;
+        sprite.y = visibleSize.height * 0.5;
+        this.addChild(sprite);
 
         return true;
     }
+
+	function problemLoading(arg0: String) : Void {
+		trace("Error while loading: " + arg0);
+	}
 }

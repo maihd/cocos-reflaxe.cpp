@@ -1,7 +1,7 @@
 package cc.base;
 
+import cxx.Ptr;
 import cxx.num.UInt32;
-import cc.base.Ptr;
 
 @:native("::cocos2d::Ref*")
 extern class Ref
